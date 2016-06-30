@@ -1,0 +1,56 @@
+html, body {
+  height: 85%;
+  margin: 0;
+  padding: 0;
+}
+
+/*styles: [
+{
+"featureType": "road.highway",
+"elementType": "geometry",
+"stylers": [
+{ "color": "#63666A" },
+{ "lightness": 34 },
+{ "visibility": "simplified" }
+]
+},{
+"featureType": "administrative",
+"stylers": [
+{ "visibility": "simplified" },
+{ "color": "#63666A" }
+]
+},{
+"featureType": "transit.line",
+"stylers": [
+{ "visibility": "on" },
+{ "color": "#FFB81C" }
+]
+},{
+"featureType": "landscape.man_made",
+"stylers": [
+{ "color": "#808080" },
+{ "lightness": 77 }
+]
+},{
+"featureType": "water",
+"stylers": [
+{ "color": "#009CDE" }
+]
+},{
+"featureType": "road",
+"elementType": "labels.text",
+"stylers": [
+{ "visibility": "on" }
+]
+},{
+"featureType": "poi.school",
+"elementType": "geometry",
+"stylers": [
+{ "weight": 0.1 },
+{ "color": "#808080" },
+{ "gamma": 2.19 }
+]
+},{
+}
+]
+};*/
