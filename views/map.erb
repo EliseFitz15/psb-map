@@ -22,6 +22,57 @@ var request = $.ajax({
 });
 
   var markers = []
+  var map;
+  var boston = { lat: 42.3601, lng: -71.0589 }
+
+  function initMap() {
+    var mapElement = document.getElementById('map');
+    var mapOptions = {
+      zoom: 12,
+      center: boston
+    };
+    var map = new google.maps.Map(mapElement, mapOptions);
+    var centerControlDiv = document.createElement('div');
+    var centerControl = new CenterControl(centerControlDiv, map);
+
+    centerControlDiv.index = 1;
+    map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
+
+    for (var i = 0; i < markers.length; i++) {
+      var marker = new google.maps.Marker({
+        position: markers[i],
+        map: map
+      });
+    }
+  }
+
+  function CenterControl(controlDiv, map) {
+    var controlUI = document.createElement('div');
+    controlUI.style.backgroundColor = '#fff';
+    controlUI.style.border = '2px solid #fff';
+    controlUI.style.borderRadius = '3px';
+    controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+    controlUI.style.cursor = 'pointer';
+    controlUI.style.marginTop = '12px';
+    controlUI.style.textAlign = 'center';
+    controlUI.title = 'Click to recenter the map';
+    controlDiv.appendChild(controlUI);
+
+    var controlText = document.createElement('div');
+    controlText.style.color = 'rgb(25,25,25)';
+    controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+    controlText.style.fontSize = '16px';
+    controlText.style.lineHeight = '38px';
+    controlText.style.paddingLeft = '5px';
+    controlText.style.paddingRight = '5px';
+    controlText.innerHTML = 'Center Map';
+    controlUI.appendChild(controlText);
+
+    controlUI.addEventListener('click', function() {
+      map.setCenter(boston);
+    });
+  }
+  
   request.done(function(data){
     data.forEach(function(stop) {
       if (stop["needs_more_clues"] === true) {
@@ -31,19 +82,30 @@ var request = $.ajax({
     initMap();
   });
 
-  function initMap() {
-      var mapElement = document.getElementById('map');
-      var mapOptions = {
-        zoom: 12,
-        center: { lat: 42.3601, lng: -71.0589 }
-      };
-    var map = new google.maps.Map(mapElement, mapOptions);
+  function CenterControl(controlDiv, map) {
+    var controlUI = document.createElement('div');
+    controlUI.style.backgroundColor = '#fff';
+    controlUI.style.border = '2px solid #fff';
+    controlUI.style.borderRadius = '3px';
+    controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+    controlUI.style.cursor = 'pointer';
+    controlUI.style.marginTop = '12px';
+    controlUI.style.textAlign = 'center';
+    controlUI.title = 'Click to recenter the map';
+    controlDiv.appendChild(controlUI);
 
-    for (var i = 0; i < markers.length; i++) {
-      var marker = new google.maps.Marker({
-        position: markers[i],
-        map: map
-      });
-    }
+    var controlText = document.createElement('div');
+    controlText.style.color = 'rgb(25,25,25)';
+    controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+    controlText.style.fontSize = '16px';
+    controlText.style.lineHeight = '38px';
+    controlText.style.paddingLeft = '5px';
+    controlText.style.paddingRight = '5px';
+    controlText.innerHTML = 'Center Map';
+    controlUI.appendChild(controlText);
+
+    controlUI.addEventListener('click', function() {
+      map.setCenter(boston);
+    });
   }
 </script>
