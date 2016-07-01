@@ -4,6 +4,16 @@ html, body {
   padding: 0;
 }
 
+.map-content {
+  position: absolute;
+  z-index: 5;
+  bottom: 16px;
+  left: 18px;
+}
+
+.row {
+  position: relative;
+}
 /*styles: [
 {
 "featureType": "road.highway",

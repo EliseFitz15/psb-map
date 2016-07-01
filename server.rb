@@ -11,3 +11,8 @@ get '/stops-list' do
 
   erb :list
 end
+
+get '/zip' do
+
+  erb :zip
+end
