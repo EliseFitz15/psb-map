@@ -9,11 +9,42 @@ html, body {
   z-index: 5;
   bottom: 16px;
   left: 18px;
+  width: 20%;
+  background-color: rgba(186,175,172, 0.85);
+  padding: 8px;
+}
+
+#zip-search-button, #zip-search-input {
+  width: 100%;
+  display: block;
+  font-size: medium;
+}
+
+#zip-search-input {
+  line-height: 25px;
+}
+
+#zip-search-button {
+  margin-bottom: 10px;
+  padding: 10px 0;
+  border: none;
+  background-color: #FF5C39;
+  color: #FFFFFF;
+}
+
+.parsley-errors-list {
+  list-style: none;
+  border-left: 4px solid #E0004D;
+  padding-left: 12px;
+  font-family: sans-serif;
+  color: #E0004D;
+  margin: 10px 0 2px;
 }
 
 .row {
   position: relative;
 }
+
 /*styles: [
 {
 "featureType": "road.highway",
