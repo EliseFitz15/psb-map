@@ -20,7 +20,7 @@ function setHeader(xhr) {
   xhr.setRequestHeader('Authorization', 'Token 2adc95279bbd2a6a69a5f08ddd2325562a262736');
 }
 var request = $.ajax({
-  url: "https://perkins-dev.raizlabs.xyz/agencies/1/stops",
+  url: "https://perkins-dev.raizlabs.xyz/agencies/1/search?lat=42.331591&lon=-71.076237&distance=10000&limit=50",
   type: 'GET',
   crossDomain: true,
   success: function(response) {
