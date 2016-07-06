@@ -32,7 +32,7 @@ var request = $.ajax({
 
 request.done(function(data){
   data.forEach(function(stop) {
-      markers.push(stop["location"]);
+      markers.push(stop);
   });
   initMap();
 });
@@ -51,12 +51,25 @@ function initMap() {
   map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
 
   for (var i = 0; i < markers.length; i++) {
+    var infoWindow = new google.maps.InfoWindow();
     var marker = new google.maps.Marker({
-      position: markers[i],
+      position: markers[i]["location"],
+      title: markers[i]["name"],
       map: map,
       icon: 'https://maps.gstatic.com/intl/en_us/mapfiles/markers2/measle_blue.png'
     });
-  }
+
+    google.maps.event.addListener(marker, "click", (function(marker, i) {
+      return function() {
+        infoWindow.setContent(
+          "<div>" +
+            "<p><span style='font-weight:bold;'>Name: </span>" + markers[i]["name"] + "</p>" +
+          "</div>"
+        );
+        infoWindow.open(map, marker);
+      }
+    })(marker, i));
+}
 
   $('#zip-search').on('submit', function(e){
     e.preventDefault();
