@@ -1,0 +1,30 @@
+<div class="route-select">
+  <input type="button" name="name" value="">
+
+</div>
+
+<div class="pin-list"></div>
+
+<script>
+
+// Wrap this in a function that can pass on the lat and lng to be used for zip code
+var markers = []
+var boston = { lat: 42.3601, lng: -71.0589 }
+
+function setHeader(xhr) {
+  xhr.setRequestHeader('Authorization', 'Token 2adc95279bbd2a6a69a5f08ddd2325562a262736');
+}
+var request = $.ajax({
+  url: "https://perkins-dev.raizlabs.xyz/agencies/1/routes",
+  type: 'GET',
+  crossDomain: true,
+  success: function(response) {
+    alert("Success");
+    console.log(response);
+  },
+  beforeSend: setHeader
+});
+</script>
+
+
+html has select box and then quary bus routes
