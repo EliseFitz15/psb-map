@@ -13,6 +13,7 @@ html, body {
   width: 20%;
   background-color: rgba(186,175,172, 0.85);
   padding: 8px;
+  box-shadow: rgba(0, 0, 0, 0.298039) 0px 2px 6px;
 }
 
 #zip-search-button, #zip-search-input {
@@ -167,10 +168,24 @@ html, body {
 @keyframes loading {
 	to { transform: rotate(360deg); }
 }
+
+.toggle-all-stops {
+  position: absolute;
+  z-index: 5;
+  right: 1%;
+  top: 2%;
+  border: none;
+  background-color: #ffb620;
+  padding: 10px 20px;
+  color: white;
+  font-size: 15px;
+  box-shadow: gray;
+  box-shadow: rgba(0, 0, 0, 0.298039) 0px 2px 6px;
+}
 /*pink - #E0004D
 light blue - #009CDE
 purple - #813699
-yellow - #813699
+yellow - #ffb620
 green - #009A17*/
 /*styles: [
 {

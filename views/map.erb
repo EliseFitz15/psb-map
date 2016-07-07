@@ -5,6 +5,7 @@
       <input type="text" name="zip-search" id="zip-search-input" placeholder="Enter 5 digit zip code" data-parsley-type="number" data-parsley-maxlength="5" required="">
     </form>
   </div>
+  <button class="toggle-all-stops">View All Stops</button>
     <div id="map" style='width:100%; height: 100%;'>
     </div>
   </div>
@@ -12,30 +13,40 @@
 
 <script>
 
-// Wrap this in a function that can pass on the lat and lng to be used for zip code
-var markers = []
+var visibleMarkers = []
+var hiddenMarkers = []
 var boston = { lat: 42.3601, lng: -71.0589 }
+var map;
 
 function setHeader(xhr) {
   xhr.setRequestHeader('Authorization', 'Token 2adc95279bbd2a6a69a5f08ddd2325562a262736');
 }
-var request = $.ajax({
+$.ajax({
   url: "https://perkins-dev.raizlabs.xyz/agencies/1/stops?needs_more_clues=1",
   type: 'GET',
   crossDomain: true,
-  success: function(response) {
-    alert("Success");
-    console.log(response);
+  success: function(data) {
+    data.forEach(function(stop) {
+      visibleMarkers.push(stop);
+    });
+    initMap();
   },
   beforeSend: setHeader
 });
 
-request.done(function(data){
-  data.forEach(function(stop) {
-      markers.push(stop);
-  });
-  initMap();
+$.ajax({
+  url: "https://perkins-dev.raizlabs.xyz/agencies/1/stops?needs_more_clues=0",
+  type: 'GET',
+  crossDomain: true,
+  success: function(data) {
+    console.log(data)
+    data.forEach(function(stop) {
+      hiddenMarkers.push(stop);
+    });
+  },
+  beforeSend: setHeader
 });
+
 
 function initMap() {
   var mapElement = document.getElementById('map');
@@ -50,11 +61,11 @@ function initMap() {
   centerControlDiv.index = 1;
   map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
 
-  for (var i = 0; i < markers.length; i++) {
+  for (var i = 0; i < visibleMarkers.length; i++) {
     var infoWindow = new google.maps.InfoWindow();
     var marker = new google.maps.Marker({
-      position: markers[i]["location"],
-      title: markers[i]["name"],
+      position: visibleMarkers[i]["location"],
+      title: visibleMarkers[i]["name"],
       map: map,
       icon: 'https://maps.gstatic.com/intl/en_us/mapfiles/markers2/measle_blue.png'
     });
@@ -63,13 +74,39 @@ function initMap() {
       return function() {
         infoWindow.setContent(
           "<div>" +
-            "<p><span style='font-weight:bold;'>Name: </span>" + markers[i]["name"] + "</p>" +
+            "<p><span style='font-weight:bold;'>Name: </span>" + visibleMarkers[i]["name"] + "</p>" +
           "</div>"
         );
         infoWindow.open(map, marker);
       }
     })(marker, i));
-}
+  }
+
+  for (var i = 0; i < hiddenMarkers.length; i++) {
+    var infoWindow = new google.maps.InfoWindow();
+    var marker = new google.maps.Marker({
+      position: hiddenMarkers[i]["location"],
+      title: hiddenMarkers[i]["name"],
+      visible: false,
+      map: map
+    });
+    // Doesn't quite work yet - needs refactor to push all markers after create
+    // into an array that we can iterate and change visiblity to each. May want to
+    // do this in the success of this query. TODO write function for iterating to create markers.
+    
+    array = []
+    array.push(marker);
+    google.maps.event.addListener(marker, "click", (function(marker, i) {
+      return function() {
+        infoWindow.setContent(
+          "<div>" +
+            "<p><span style='font-weight:bold;'>Name: </span>" + hiddenMarkers[i]["name"] + "</p>" +
+          "</div>"
+        );
+        infoWindow.open(map, marker);
+      }
+    })(marker, i));
+  }
 
   $('#zip-search').on('submit', function(e){
     e.preventDefault();
@@ -86,6 +123,20 @@ function initMap() {
     });
     $('#zip-search-input').val("");
   });
+
+// this not working still
+  function setVisiblityMarkers(markers) {
+    for (var i = 0; i < markers.length; i++) {
+      markers[i].setVisible(true);
+    }
+  }
+
+  $(".toggle-all-stops").click(function () {
+     $(this).text(function(i, v){
+        return v === 'View All Stops' ? 'Needs Clues' : 'View All Stops'
+     });
+     setVisiblityMarkers(array);
+   });
 }
 
 function CenterControl(controlDiv, map) {
