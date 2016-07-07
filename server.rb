@@ -12,7 +12,7 @@ get '/stops-list' do
   erb :list
 end
 
-get '/zip' do
+get '/routes' do
 
-  erb :zip
+  erb :routes
 end

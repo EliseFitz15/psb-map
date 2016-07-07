@@ -2,13 +2,14 @@ html, body {
   height: 85%;
   margin: 0;
   padding: 0;
+  font-family: "myriad-pro",arial,sans-serif;
 }
 
 .map-content {
   position: absolute;
   z-index: 5;
-  bottom: 16px;
-  left: 18px;
+  bottom:25px;
+  left: 20px;
   width: 20%;
   background-color: rgba(186,175,172, 0.85);
   padding: 8px;
@@ -45,6 +46,132 @@ html, body {
   position: relative;
 }
 
+.route-content, .list-wrapper {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.list-wrapper p {
+  font-size: 22px;
+}
+
+.list-wrapper p span {
+  color: #813699;
+  font-weight: bolder;
+}
+
+.route-selecter-wrapper {
+  position: relative;
+  height: 50px;
+}
+
+.route-selecter-wrapper select {
+  position: absolute;
+  left: 35%;
+  width: 30%;
+  font-size: 20px;
+  height: 35px;
+  border: 1px solid #63656a;
+  color: #ff5c39;
+  background-color: #fff;
+  box-sizing: content-box;
+  border-radius: 0px !important;
+}
+
+.route-list-description p {
+  font-size: 30px;
+}
+
+.stops-list {
+  list-style: none;
+  font-size: 24px;
+  padding-left: 0px;
+}
+
+.stops-list li {
+  line-height: 2;
+}
+
+.stops-list li:before {
+  content: "";
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: block;
+  margin-right: 39px;
+  float: left;
+  margin-top: 6px;
+  background-color: white;
+  z-index: 1;
+  border: 5px solid #009CDE;
+}
+
+.stops-list li:after {
+  content: "";
+  width: 4px;
+  height: 48px;
+  display: block;
+  margin-top: -28px;
+  background-color: #E0004D;
+  z-index: 0;
+  margin-left: 15px;
+  margin-bottom: -10px;
+}
+
+.stops-list li:last-of-type:after {
+  content: "";
+  width: 0px;
+  height: 0px;
+  display: block;
+  margin-top: -28px;
+  background-color: #E0004D;
+  z-index: 0;
+  margin-left: 15px;
+  margin-bottom: -10px;
+}
+
+.spinner {
+  width: 40px;
+  	height: 40px;
+  	border-radius: 50%;
+  	background: transparent;
+    position: absolute;
+    left: calc(50% - 20px);
+    display: none;
+
+  	border-top: 4px solid #fff;
+  	border-right: 4px solid #fff;
+  	border-bottom: 4px solid #813699;
+  	border-left: 4px solid #813699;
+
+  	-webkit-animation: loading 1.2s infinite linear;
+  	-moz-animation: loading 1.2s infinite linear;
+  	-ms-animation: loading 1.2s infinite linear;
+  	animation: loading 1.2s infinite linear;
+}
+
+.spinning {
+  display: block;
+}
+
+@-webkit-keyframes loading {
+  to { -webkit-transform: rotate(360deg); }
+}
+@-moz-keyframes loading {
+	to { -moz-transform: rotate(360deg); }
+}
+@-ms-keyframes loading {
+	to { -ms-transform: rotate(360deg); }
+}
+@keyframes loading {
+	to { transform: rotate(360deg); }
+}
+/*pink - #E0004D
+light blue - #009CDE
+purple - #813699
+yellow - #813699
+green - #009A17*/
 /*styles: [
 {
 "featureType": "road.highway",
