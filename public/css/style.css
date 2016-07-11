@@ -173,6 +173,7 @@ html, body {
 }
 
 .toggle-all-stops {
+  width: 17%;
   position: absolute;
   z-index: 5;
   right: 1%;
