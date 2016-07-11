@@ -27,11 +27,12 @@ html, body {
 }
 
 #zip-search-button {
-  margin-bottom: 10px;
+  margin-top: 10px;
   padding: 10px 0;
   border: none;
   background-color: #FF5C39;
   color: #FFFFFF;
+  cursor: pointer;
 }
 
 .parsley-errors-list {
@@ -41,6 +42,7 @@ html, body {
   font-family: sans-serif;
   color: #E0004D;
   margin: 10px 0 2px;
+  font-size: 12px;
 }
 
 .row {
@@ -181,6 +183,7 @@ html, body {
   color: white;
   font-size: 15px;
   box-shadow: rgba(0, 0, 0, 0.298039) 0px 2px 6px;
+  cursor: pointer;
 }
 /*pink - #E0004D
 light blue - #009CDE
