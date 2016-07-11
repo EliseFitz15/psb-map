@@ -82,6 +82,7 @@ html, body {
 
 .route-list-description p {
   font-size: 30px;
+  text-align: center;
 }
 
 .stops-list {
