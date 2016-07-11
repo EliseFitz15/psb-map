@@ -30,14 +30,13 @@ function selectRoute(selected) {
     type: 'GET',
     crossDomain: true,
     success: function(response) {
-      $(".spinner").removeClass("spinning")
+      $(".spinner").removeClass("spinning");
       if (response.length > 0) {
         $(".list-wrapper").prepend("<p>The following <span>" + response.length + "</span> stops still need clues on this route:</p>");
 
         for (var i = 0; i < response.length; i++) {
           $(".stops-list").append("<li>" + response[i]["name"] + "</li>");
         };
-        console.log(response);
       } else {
         $(".list-wrapper").prepend("<p>Thank you to all our crowdsourcers this bus route doesn't have any bus stops that require clues!</p>");
       };

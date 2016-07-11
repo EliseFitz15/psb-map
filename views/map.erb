@@ -41,7 +41,25 @@ $.ajax({
   success: function(data) {
     console.log(data)
     data.forEach(function(stop) {
-      hiddenMarkers.push(stop);
+      var infoWindow = new google.maps.InfoWindow();
+      var marker = new google.maps.Marker({
+        position: stop["location"],
+        title: stop["name"],
+        visible: false,
+        map: map
+      });
+
+      google.maps.event.addListener(marker, "click", (function(marker) {
+        return function() {
+          infoWindow.setContent(
+            "<div>" +
+            "<p><span style='font-weight:bold;'>Name: </span>" + stop["name"] + "</p>" +
+            "</div>"
+          );
+          infoWindow.open(map, marker);
+        }
+      })(marker));
+      hiddenMarkers.push(marker);
     });
   },
   beforeSend: setHeader
@@ -67,7 +85,7 @@ function initMap() {
       position: visibleMarkers[i]["location"],
       title: visibleMarkers[i]["name"],
       map: map,
-      icon: 'https://maps.gstatic.com/intl/en_us/mapfiles/markers2/measle_blue.png'
+      icon: 'https://s3.amazonaws.com/perkins-markers/img_bus_stop_has_clues.svg?X-Amz-Date=20160711T175026Z&X-Amz-Expires=300&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Signature=9cf3c200185292403dc5c172ef97bf7d82d596c3756837d0e54997283b82104d&X-Amz-Credential=ASIAIJG4I2C7KPJ7VB6Q/20160711/us-east-1/s3/aws4_request&X-Amz-SignedHeaders=Host&x-amz-security-token=FQoDYXdzEDMaDO2TtJgEuha8mhY9KiLHAehvWGqfhOEBcfviInDwktA6E4/7o88cUdXYNxtCwQwVoiI3NHZeCRNdstbZD6Svzp0HDmLdwhGLUCtOG1BPXeT3vklkggb54FO5xszGP4TzVtKWkQqtO/yq5C0ENAjzJAFsCfA00SrKKGQ57eWOSXa7U%2BAXZTnEuQDb29BQNmnHnrfUfZr4VrlJ0B7/J1JTF56NNt55NQ5UaBoxgKSQVeC8Hat7WwDDzeW2LJqy3Ml1Xz1EY/mH0EyayhtQf6LgAThKEw9tYO4o1rOPvAU%3D'
     });
 
     google.maps.event.addListener(marker, "click", (function(marker, i) {
@@ -75,32 +93,6 @@ function initMap() {
         infoWindow.setContent(
           "<div>" +
             "<p><span style='font-weight:bold;'>Name: </span>" + visibleMarkers[i]["name"] + "</p>" +
-          "</div>"
-        );
-        infoWindow.open(map, marker);
-      }
-    })(marker, i));
-  }
-
-  for (var i = 0; i < hiddenMarkers.length; i++) {
-    var infoWindow = new google.maps.InfoWindow();
-    var marker = new google.maps.Marker({
-      position: hiddenMarkers[i]["location"],
-      title: hiddenMarkers[i]["name"],
-      visible: false,
-      map: map
-    });
-    // Doesn't quite work yet - needs refactor to push all markers after create
-    // into an array that we can iterate and change visiblity to each. May want to
-    // do this in the success of this query. TODO write function for iterating to create markers.
-    
-    array = []
-    array.push(marker);
-    google.maps.event.addListener(marker, "click", (function(marker, i) {
-      return function() {
-        infoWindow.setContent(
-          "<div>" +
-            "<p><span style='font-weight:bold;'>Name: </span>" + hiddenMarkers[i]["name"] + "</p>" +
           "</div>"
         );
         infoWindow.open(map, marker);
@@ -124,19 +116,19 @@ function initMap() {
     $('#zip-search-input').val("");
   });
 
-// this not working still
-  function setVisiblityMarkers(markers) {
-    for (var i = 0; i < markers.length; i++) {
-      markers[i].setVisible(true);
-    }
-  }
-
   $(".toggle-all-stops").click(function () {
-     $(this).text(function(i, v){
-        return v === 'View All Stops' ? 'Needs Clues' : 'View All Stops'
-     });
-     setVisiblityMarkers(array);
-   });
+    $(this).text(function(i, v){
+      return v === 'View All Stops' ? 'View Needs Clues' : 'View All Stops'
+    });
+    for (var i = 0; i < hiddenMarkers.length; i++) {
+      if(hiddenMarkers[i].getVisible()) {
+        hiddenMarkers[i].setVisible(false);
+      } else {
+        hiddenMarkers[i].setVisible(true);
+        hiddenMarkers[i].setMap(map);
+      };
+    };
+  });
 }
 
 function CenterControl(controlDiv, map) {
