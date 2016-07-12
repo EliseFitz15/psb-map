@@ -19,18 +19,18 @@ html, body {
 #zip-search-button, #zip-search-input {
   width: 100%;
   display: block;
-  font-size: medium;
+  font-size: 16px;
 }
 
 #zip-search-input {
-  line-height: 25px;
+  line-height: 29px;
 }
 
 #zip-search-button {
   margin-top: 10px;
   padding: 10px 0;
   border: none;
-  background-color: #FF5C39;
+  background-color: #ffb620;
   color: #FFFFFF;
   cursor: pointer;
 }
@@ -186,58 +186,29 @@ html, body {
   box-shadow: rgba(0, 0, 0, 0.298039) 0px 2px 6px;
   cursor: pointer;
 }
+
+#zip-search-button:hover {
+  background-color: #e5ae3e;
+  transition: background-color 300ms ease-out
+}
+
+@media screen and (max-width: 830px) {
+  .toggle-all-stops {
+    width: 25%;
+    font-size: 11px;
+  }
+  #zip-search-button, #zip-search-input {
+    font-size: 11px;
+  }
+  .parsley-errors-list {
+    font-size: 9px;
+  }
+  .map-content {
+    width: 32%;
+  }
+}
 /*pink - #E0004D
 light blue - #009CDE
 purple - #813699
 yellow - #ffb620
 green - #009A17*/
-/*styles: [
-{
-"featureType": "road.highway",
-"elementType": "geometry",
-"stylers": [
-{ "color": "#63666A" },
-{ "lightness": 34 },
-{ "visibility": "simplified" }
-]
-},{
-"featureType": "administrative",
-"stylers": [
-{ "visibility": "simplified" },
-{ "color": "#63666A" }
-]
-},{
-"featureType": "transit.line",
-"stylers": [
-{ "visibility": "on" },
-{ "color": "#FFB81C" }
-]
-},{
-"featureType": "landscape.man_made",
-"stylers": [
-{ "color": "#808080" },
-{ "lightness": 77 }
-]
-},{
-"featureType": "water",
-"stylers": [
-{ "color": "#009CDE" }
-]
-},{
-"featureType": "road",
-"elementType": "labels.text",
-"stylers": [
-{ "visibility": "on" }
-]
-},{
-"featureType": "poi.school",
-"elementType": "geometry",
-"stylers": [
-{ "weight": 0.1 },
-{ "color": "#808080" },
-{ "gamma": 2.19 }
-]
-},{
-}
-]
-};*/
