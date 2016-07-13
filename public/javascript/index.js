@@ -102,45 +102,50 @@ $.ajax({
   type: 'GET',
   crossDomain: true,
   success: function(data) {
+    console.log(data.length)
     data.forEach(function(stop) {
       if (jQuery.inArray(stop["name"], indoorStops) < 0) {
         visibleMarkers.push(stop);
       };
     });
     initMap();
+    getStopsWithClues();
   },
   beforeSend: setHeader
 });
 
-$.ajax({
-  url: "https://perkins-dev.raizlabs.xyz/agencies/1/stops?needs_more_clues=0",
-  type: 'GET',
-  crossDomain: true,
-  success: function(data) {
-    data.forEach(function(stop) {
-      var infoWindow = new google.maps.InfoWindow();
-      var marker = new google.maps.Marker({
-        position: stop["location"],
-        title: stop["name"],
-        visible: false,
-        icon: hasCluesImage
+function getStopsWithClues() {
+  $.ajax({
+    url: "https://perkins-dev.raizlabs.xyz/agencies/1/stops?needs_more_clues=0",
+    type: 'GET',
+    crossDomain: true,
+    success: function(data) {
+      data.forEach(function(stop) {
+        console.log(data.length)
+        var infoWindow = new google.maps.InfoWindow();
+        var marker = new google.maps.Marker({
+          position: stop["location"],
+          title: stop["name"],
+          visible: false,
+          icon: hasCluesImage
+        });
+
+        google.maps.event.addListener(marker, "click", (function(marker) {
+          return function() {
+            infoWindow.setContent(
+              "<div>" +
+              "<p><span style='font-weight:bold;'>/Bus Stop: </span>" + stop["name"] + "</p>" +
+              "</div>"
+            );
+            infoWindow.open(map, marker);
+          }
+        })(marker));
+        hiddenMarkers.push(marker);
       });
-
-      google.maps.event.addListener(marker, "click", (function(marker) {
-        return function() {
-          infoWindow.setContent(
-            "<div>" +
-            "<p><span style='font-weight:bold;'>/Bus Stop: </span>" + stop["name"] + "</p>" +
-            "</div>"
-          );
-          infoWindow.open(map, marker);
-        }
-      })(marker));
-      hiddenMarkers.push(marker);
-    });
-  },
-  beforeSend: setHeader
-});
+    },
+    beforeSend: setHeader
+  });
+}
 
 
 function initMap() {
