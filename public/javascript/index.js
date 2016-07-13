@@ -65,14 +65,29 @@ var styles = [
   }
 ]
 
-var has_clues_image = {
+var indoorStops = ["Harvard Lower Busway @ Red Line",
+"Harvard Upper Busway @ Red Line",
+"Alewife Station Busway",
+"Kenmore Station Busway",
+"Forest Hills Station Lower Busway",
+"Forest Hills Station Upper Busway",
+"Ruggles Sta - Upper Level",
+"Andrew Station Busway",
+"Wellington Station Busway",
+"Columbia Rd @ JFK/UMASS Station",
+"Fields Corner Station @ Red Line",
+"Dorchester Ave @ Ashmont Busway",
+"Burgin Pkwy @ Quincy Center Station",
+"N Quincy Station @ Red Line"]
+
+var hasCluesImage = {
   url: 'https://s3.amazonaws.com/perkins-markers/img_bus_stop_has_clues.png?X-Amz-Date=20160713T135514Z&X-Amz-Expires=300&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Signature=9ba432a85391ecaa3c7102ecf03a706eda5a1a037c79e567847a444f72d7fc24&X-Amz-Credential=ASIAJ3OVIY6SMQ6OTOYA/20160713/us-east-1/s3/aws4_request&X-Amz-SignedHeaders=Host&x-amz-security-token=FQoDYXdzEF8aDFxhOkRSSo2PhSmQ9SLHAapcSIcdv5QOUq9k4gPAPwTStRET5x6oHomTCgEoJX8pJfwOp5yhy2FMVoabGqocKIDWAhFL4WoOxvQ2HDHi4eK34LookHmtmj5qxw%2BTcCVmZPRnh3V7gc86AHIPDCp9lfx0%2BEHQniebcDVh5NTZ3BXPHEuWO5iGQT%2BZ0CcCpNjd3G8dFZ1eEw5Wpv6hrLL6TrWUme9QZ6ZomwnmlC43UKbfrXUIyMHRGgYtTDxguORIJsnuSJ2hWJhr/JvXb6qfaD/Rr0Kt/e4oi4uZvAU%3D',
   size: new google.maps.Size(17, 17),
   origin: new google.maps.Point(0, 0),
   scaledSize: new google.maps.Size(13, 13)
 };
 
-var needs_clues_image = {
+var needsCluesImage = {
   url: 'https://s3.amazonaws.com/perkins-markers/img_bus_stop_needs_clues.png?X-Amz-Date=20160713T135535Z&X-Amz-Expires=300&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Signature=268b2d627a85d0e1d7c7c202ec9cddb3de7757126cfa3c0069cad2d192a1a3e5&X-Amz-Credential=ASIAJ3OVIY6SMQ6OTOYA/20160713/us-east-1/s3/aws4_request&X-Amz-SignedHeaders=Host&x-amz-security-token=FQoDYXdzEF8aDFxhOkRSSo2PhSmQ9SLHAapcSIcdv5QOUq9k4gPAPwTStRET5x6oHomTCgEoJX8pJfwOp5yhy2FMVoabGqocKIDWAhFL4WoOxvQ2HDHi4eK34LookHmtmj5qxw%2BTcCVmZPRnh3V7gc86AHIPDCp9lfx0%2BEHQniebcDVh5NTZ3BXPHEuWO5iGQT%2BZ0CcCpNjd3G8dFZ1eEw5Wpv6hrLL6TrWUme9QZ6ZomwnmlC43UKbfrXUIyMHRGgYtTDxguORIJsnuSJ2hWJhr/JvXb6qfaD/Rr0Kt/e4oi4uZvAU%3D',
   size: new google.maps.Size(17, 17),
   origin: new google.maps.Point(0, 0),
@@ -88,7 +103,9 @@ $.ajax({
   crossDomain: true,
   success: function(data) {
     data.forEach(function(stop) {
-      visibleMarkers.push(stop);
+      if (jQuery.inArray(stop["name"], indoorStops) < 0) {
+        visibleMarkers.push(stop);
+      };
     });
     initMap();
   },
@@ -106,14 +123,14 @@ $.ajax({
         position: stop["location"],
         title: stop["name"],
         visible: false,
-        icon: has_clues_image
+        icon: hasCluesImage
       });
 
       google.maps.event.addListener(marker, "click", (function(marker) {
         return function() {
           infoWindow.setContent(
             "<div>" +
-            "<p><span style='font-weight:bold;'>Name: </span>" + stop["name"] + "</p>" +
+            "<p><span style='font-weight:bold;'>/Bus Stop: </span>" + stop["name"] + "</p>" +
             "</div>"
           );
           infoWindow.open(map, marker);
@@ -146,14 +163,14 @@ function initMap() {
       position: visibleMarkers[i]["location"],
       title: visibleMarkers[i]["name"],
       map: map,
-      icon: needs_clues_image
+      icon: needsCluesImage
     });
 
     google.maps.event.addListener(marker, "click", (function(marker, i) {
       return function() {
         infoWindow.setContent(
           "<div>" +
-            "<p><span style='font-weight:bold;'>Name: </span>" + visibleMarkers[i]["name"] + "</p>" +
+            "<p><span style='font-weight:bold;'>Bus Stop: </span>" + visibleMarkers[i]["name"] + "</p>" +
           "</div>"
         );
         infoWindow.open(map, marker);
