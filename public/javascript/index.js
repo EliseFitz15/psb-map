@@ -18,14 +18,14 @@ var indoorStops = ["Harvard Lower Busway @ Red Line",
 "N Quincy Station @ Red Line"]
 
 var hasCluesImage = {
-  url: 'https://s3.amazonaws.com/map-pins/img_bus_stop_has_clues.png?X-Amz-Date=20160713T174952Z&X-Amz-Expires=300&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Signature=3a12217365d26a34bcdf42c310d12d20b8f1a6393e784782e5f5cd57acc3698b&X-Amz-Credential=ASIAJ6NEI7Y3EUVJQ2QQ/20160713/us-east-1/s3/aws4_request&X-Amz-SignedHeaders=Host&x-amz-security-token=FQoDYXdzEGEaDIIdnKRVIcN6wGOJ4CLvAkjmslB56SFOFwXnYFDH9yuMsRuq7ZLPlXM4FOgAO8EBRcytxU2eFkHPPl0Q98VbK/z9m4OD6Q06XRm86KdEwg33me9jmzBY7TjiJOfCv8hloBdUnmFpTHigmD9p6nlMWg59cj3D%2B7IUYbmE2RlS8VNewFghRNLU3ywwEvweTLec%2BIENbAUa/v9HXOnnQBPncCxa3i2Uvi4/e4iS03B6LcKAdDQAPyHNAS0YXK1SGhOZ8YgODRHgEfWaNziO8/TKYRiuOKi9aI3/IiC%2BLaRodQqqWVaUsdgKbFaPNmJHJjx4o/nSyarZKfkxunGtRpinSTEbuf79Evh/7EDOaYdDa29CWWOIBfbGcYqdb%2BxehdAOu5y0EwmjJPeM5vKgKjYMeDxLvEpSrz%2Bi%2BTOQswsAqPjhckCTppw9lIip5ylAAbSJeCjK70RQb0cyTWyyRO3eOY6OI/wLxZW90ptmnlLciX225%2By4BCSfihmzEUW4/PYo0cGZvAU%3D',
+  url: 'https://s3.amazonaws.com/map-pins/img_bus_stop_has_clues.png?X-Amz-Date=20160713T200255Z&X-Amz-Expires=300&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Signature=4b48026528d235b3f66e17c29f260b7df97d5948e59a39d29460c6ea64766d12&X-Amz-Credential=ASIAJ6NEI7Y3EUVJQ2QQ/20160713/us-east-1/s3/aws4_request&X-Amz-SignedHeaders=Host&x-amz-security-token=FQoDYXdzEGEaDIIdnKRVIcN6wGOJ4CLvAkjmslB56SFOFwXnYFDH9yuMsRuq7ZLPlXM4FOgAO8EBRcytxU2eFkHPPl0Q98VbK/z9m4OD6Q06XRm86KdEwg33me9jmzBY7TjiJOfCv8hloBdUnmFpTHigmD9p6nlMWg59cj3D%2B7IUYbmE2RlS8VNewFghRNLU3ywwEvweTLec%2BIENbAUa/v9HXOnnQBPncCxa3i2Uvi4/e4iS03B6LcKAdDQAPyHNAS0YXK1SGhOZ8YgODRHgEfWaNziO8/TKYRiuOKi9aI3/IiC%2BLaRodQqqWVaUsdgKbFaPNmJHJjx4o/nSyarZKfkxunGtRpinSTEbuf79Evh/7EDOaYdDa29CWWOIBfbGcYqdb%2BxehdAOu5y0EwmjJPeM5vKgKjYMeDxLvEpSrz%2Bi%2BTOQswsAqPjhckCTppw9lIip5ylAAbSJeCjK70RQb0cyTWyyRO3eOY6OI/wLxZW90ptmnlLciX225%2By4BCSfihmzEUW4/PYo0cGZvAU%3D',
   size: new google.maps.Size(17, 17),
   origin: new google.maps.Point(0, 0),
   scaledSize: new google.maps.Size(13, 13)
 };
 
 var needsCluesImage = {
-  url: 'https://s3.amazonaws.com/map-pins/img_bus_stop_needs_clues.png?X-Amz-Date=20160713T175004Z&X-Amz-Expires=300&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Signature=b17a7079fed166fc058b8d38f229eb3ac771b9b92fc22d384033c1f9d0e69774&X-Amz-Credential=ASIAJ6NEI7Y3EUVJQ2QQ/20160713/us-east-1/s3/aws4_request&X-Amz-SignedHeaders=Host&x-amz-security-token=FQoDYXdzEGEaDIIdnKRVIcN6wGOJ4CLvAkjmslB56SFOFwXnYFDH9yuMsRuq7ZLPlXM4FOgAO8EBRcytxU2eFkHPPl0Q98VbK/z9m4OD6Q06XRm86KdEwg33me9jmzBY7TjiJOfCv8hloBdUnmFpTHigmD9p6nlMWg59cj3D%2B7IUYbmE2RlS8VNewFghRNLU3ywwEvweTLec%2BIENbAUa/v9HXOnnQBPncCxa3i2Uvi4/e4iS03B6LcKAdDQAPyHNAS0YXK1SGhOZ8YgODRHgEfWaNziO8/TKYRiuOKi9aI3/IiC%2BLaRodQqqWVaUsdgKbFaPNmJHJjx4o/nSyarZKfkxunGtRpinSTEbuf79Evh/7EDOaYdDa29CWWOIBfbGcYqdb%2BxehdAOu5y0EwmjJPeM5vKgKjYMeDxLvEpSrz%2Bi%2BTOQswsAqPjhckCTppw9lIip5ylAAbSJeCjK70RQb0cyTWyyRO3eOY6OI/wLxZW90ptmnlLciX225%2By4BCSfihmzEUW4/PYo0cGZvAU%3D',
+  url: 'https://s3.amazonaws.com/map-pins/img_bus_stop_needs_clues.png?X-Amz-Date=20160713T200259Z&X-Amz-Expires=300&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Signature=b8005ee1e9aa310b1e17e87d07d756d5846ea23a89b80846bcba5a8f53aceacb&X-Amz-Credential=ASIAJ6NEI7Y3EUVJQ2QQ/20160713/us-east-1/s3/aws4_request&X-Amz-SignedHeaders=Host&x-amz-security-token=FQoDYXdzEGEaDIIdnKRVIcN6wGOJ4CLvAkjmslB56SFOFwXnYFDH9yuMsRuq7ZLPlXM4FOgAO8EBRcytxU2eFkHPPl0Q98VbK/z9m4OD6Q06XRm86KdEwg33me9jmzBY7TjiJOfCv8hloBdUnmFpTHigmD9p6nlMWg59cj3D%2B7IUYbmE2RlS8VNewFghRNLU3ywwEvweTLec%2BIENbAUa/v9HXOnnQBPncCxa3i2Uvi4/e4iS03B6LcKAdDQAPyHNAS0YXK1SGhOZ8YgODRHgEfWaNziO8/TKYRiuOKi9aI3/IiC%2BLaRodQqqWVaUsdgKbFaPNmJHJjx4o/nSyarZKfkxunGtRpinSTEbuf79Evh/7EDOaYdDa29CWWOIBfbGcYqdb%2BxehdAOu5y0EwmjJPeM5vKgKjYMeDxLvEpSrz%2Bi%2BTOQswsAqPjhckCTppw9lIip5ylAAbSJeCjK70RQb0cyTWyyRO3eOY6OI/wLxZW90ptmnlLciX225%2By4BCSfihmzEUW4/PYo0cGZvAU%3D',
   size: new google.maps.Size(17, 17),
   origin: new google.maps.Point(0, 0),
   scaledSize: new google.maps.Size(13, 13)
@@ -39,7 +39,6 @@ $.ajax({
   type: 'GET',
   crossDomain: true,
   success: function(data) {
-    console.log(data.length)
     data.forEach(function(stop) {
       if (jQuery.inArray(stop["name"], indoorStops) < 0) {
         visibleMarkers.push(stop);
@@ -58,7 +57,6 @@ function getStopsWithClues() {
     crossDomain: true,
     success: function(data) {
       data.forEach(function(stop) {
-        console.log(data.length)
         var infoWindow = new google.maps.InfoWindow();
         var marker = new google.maps.Marker({
           position: stop["location"],
@@ -164,7 +162,7 @@ function CenterControl(controlDiv, map) {
   controlDiv.appendChild(controlUI);
 
   var controlText = document.createElement('div');
-  controlText.style.color = 'rgb(25,25,25)';
+  controlText.style.color = '#222222';
   controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
   controlText.style.fontSize = '16px';
   controlText.style.lineHeight = '38px';

@@ -31,7 +31,7 @@ html, body {
   padding: 10px 0;
   border: none;
   background-color: #ffb620;
-  color: #000000;
+  color: #222222;
   cursor: pointer;
 }
 
@@ -45,31 +45,31 @@ html, body {
   font-size: 12px;
 }
 
-.row {
+.map-container {
   position: relative;
 }
 
-.route-content, .list-wrapper {
+.route-content, .stops-list-container {
   width: 80%;
   margin-left: auto;
   margin-right: auto;
 }
 
-.list-wrapper p {
+.stops-list-container p {
   font-size: 22px;
 }
 
-.list-wrapper p span {
+.stops-list-container p span {
   color: #813699;
   font-weight: bolder;
 }
 
-.route-selecter-wrapper {
+.route-selector-container {
   position: relative;
   height: 50px;
 }
 
-.route-selecter-wrapper select {
+.route-selector-container .route-select {
   position: absolute;
   left: 35%;
   width: 30%;
@@ -135,7 +135,7 @@ html, body {
   margin-bottom: -10px;
 }
 
-.spinner {
+.list-spinner {
   width: 40px;
   	height: 40px;
   	border-radius: 50%;
@@ -181,7 +181,7 @@ html, body {
   border: none;
   background-color: #ffb620;
   padding: 10px 20px;
-  color: #000000;
+  color: #222222;
   font-size: 15px;
   box-shadow: rgba(0, 0, 0, 0.298039) 0px 2px 6px;
   cursor: pointer;
@@ -207,8 +207,3 @@ html, body {
     width: 32%;
   }
 }
-/*pink - #E0004D
-light blue - #009CDE
-purple - #813699
-yellow - #ffb620
-green - #009A17*/
