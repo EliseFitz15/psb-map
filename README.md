@@ -47,7 +47,3 @@ There are two options for including the images for the bus stop icons. The simpl
 
 ## Drupal Google Maps module
 This implementation uses the Google Maps Javascript API library. During research I came across the Drupal Google Maps module which may need to be enabled.
-
-Questions for Aakar/Jason
-- Should I just include the production api links? and auth token?
-- Tokens for APIs, S3
