@@ -45,6 +45,7 @@ $.ajax({
       };
     });
     initMap();
+    displayButtons();
     getStopsWithClues();
   },
   beforeSend: setHeader
@@ -97,26 +98,26 @@ function initMap() {
   centerControlDiv.index = 1;
   map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
 
-  for (var i = 0; i < visibleMarkers.length; i++) {
+  visibleMarkers.forEach(function(stop){
     var infoWindow = new google.maps.InfoWindow();
     var marker = new google.maps.Marker({
-      position: visibleMarkers[i]["location"],
-      title: visibleMarkers[i]["name"],
+      position: stop["location"],
+      title: stop["name"],
       map: map,
       icon: needsCluesImage
     });
 
-    google.maps.event.addListener(marker, "click", (function(marker, i) {
+    google.maps.event.addListener(marker, "click", (function(marker) {
       return function() {
         infoWindow.setContent(
           "<div>" +
-            "<p><span style='font-weight:bold;'>Bus Stop: </span>" + visibleMarkers[i]["name"] + "</p>" +
+          "<p><span style='font-weight:bold;'>Bus Stop: </span>" + stop["name"] + "</p>" +
           "</div>"
         );
         infoWindow.open(map, marker);
       }
-    })(marker, i));
-  }
+    })(marker));
+  })
 
   $('#zip-search').on('submit', function(e){
     e.preventDefault();
@@ -126,11 +127,13 @@ function initMap() {
       url: "https://maps.googleapis.com/maps/api/geocode/json?&address=" + zipCode + "",
       type: 'GET'
     });
+
     zipRequest.done(function(data){
       var point = data["results"][0]["geometry"]["location"];
       map.setCenter(point);
       map.setZoom(15);
     });
+
     $('#zip-search-input').val("");
   });
 
@@ -138,15 +141,20 @@ function initMap() {
     $(this).text(function(i, v){
       return v === 'Show Stops w/ Clues' ? 'Hide Stops w/ Clues' : 'Show Stops w/ Clues'
     });
-    for (var i = 0; i < hiddenMarkers.length; i++) {
-      if(hiddenMarkers[i].getVisible()) {
-        hiddenMarkers[i].setVisible(false);
+    hiddenMarkers.forEach(function(marker) {
+      if(marker.getVisible()) {
+        marker.setVisible(false);
       } else {
-        hiddenMarkers[i].setVisible(true);
-        hiddenMarkers[i].setMap(map);
+        marker.setVisible(true);
+        marker.setMap(map);
       };
-    };
+    });
   });
+}
+
+function displayButtons() {
+  $('.toggle-all-stops').css('display', 'block');
+  $('.form-container').css('display', 'block');
 }
 
 function CenterControl(controlDiv, map) {
