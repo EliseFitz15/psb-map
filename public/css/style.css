@@ -228,7 +228,7 @@ html, body {
   }
 
   .stops-list li:before {
-    margin-right: 13px;
+    margin-right: 12px;
   }
 
   .route-selector-container .route-select {
