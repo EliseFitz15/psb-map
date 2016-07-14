@@ -233,6 +233,6 @@ html, body {
 
   .route-selector-container .route-select {
     left: 15%;
-    width: 100%;
+    width: auto;
   }
 }
