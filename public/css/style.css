@@ -5,7 +5,15 @@ html, body {
   font-family: "myriad-pro",arial,sans-serif;
 }
 
-.map-content {
+/*Map Stlyes*/
+
+.map-container {
+  height: auto;
+  width: auto;
+  position: relative;
+}
+
+.form-container {
   position: absolute;
   z-index: 5;
   bottom:25px;
@@ -45,9 +53,27 @@ html, body {
   font-size: 12px;
 }
 
-.map-container {
-  position: relative;
+.toggle-all-stops {
+  width: 17%;
+  position: absolute;
+  z-index: 5;
+  right: 1%;
+  top: 2%;
+  border: none;
+  background-color: #ffb620;
+  padding: 10px 20px;
+  color: #222222;
+  font-size: 15px;
+  box-shadow: rgba(0, 0, 0, 0.298039) 0px 2px 6px;
+  cursor: pointer;
 }
+
+#zip-search-button:hover, .toggle-all-stops:hover {
+  background-color: #e5ae3e;
+  transition: background-color 300ms ease-out
+}
+
+/*Routes Styles*/
 
 .route-content, .stops-list-container {
   width: 80%;
@@ -135,29 +161,30 @@ html, body {
   margin-bottom: -10px;
 }
 
-.list-spinner {
-  width: 40px;
-  	height: 40px;
-  	border-radius: 50%;
-  	background: transparent;
-    position: absolute;
-    left: calc(50% - 20px);
-    display: none;
-
-  	border-top: 4px solid #fff;
-  	border-right: 4px solid #fff;
-  	border-bottom: 4px solid #813699;
-  	border-left: 4px solid #813699;
-
-  	-webkit-animation: loading 1.2s infinite linear;
-  	-moz-animation: loading 1.2s infinite linear;
-  	-ms-animation: loading 1.2s infinite linear;
-  	animation: loading 1.2s infinite linear;
-}
-
 .spinning {
   display: block;
 }
+
+.list-spinner {
+  width: 40px;
+  height: 40px;
+	border-radius: 50%;
+	background: transparent;
+  position: absolute;
+  left: calc(50% - 20px);
+  display: none;
+
+	border-top: 4px solid #fff;
+	border-right: 4px solid #fff;
+	border-bottom: 4px solid #813699;
+	border-left: 4px solid #813699;
+
+	-webkit-animation: loading 1.2s infinite linear;
+	-moz-animation: loading 1.2s infinite linear;
+	-ms-animation: loading 1.2s infinite linear;
+	animation: loading 1.2s infinite linear;
+}
+
 
 @-webkit-keyframes loading {
   to { -webkit-transform: rotate(360deg); }
@@ -172,38 +199,34 @@ html, body {
 	to { transform: rotate(360deg); }
 }
 
-.toggle-all-stops {
-  width: 17%;
-  position: absolute;
-  z-index: 5;
-  right: 1%;
-  top: 2%;
-  border: none;
-  background-color: #ffb620;
-  padding: 10px 20px;
-  color: #222222;
-  font-size: 15px;
-  box-shadow: rgba(0, 0, 0, 0.298039) 0px 2px 6px;
-  cursor: pointer;
-}
-
-#zip-search-button:hover, .toggle-all-stops:hover {
-  background-color: #e5ae3e;
-  transition: background-color 300ms ease-out
-}
-
+/*Adjusts map content and routes for smaller screens*/
 @media screen and (max-width: 830px) {
   .toggle-all-stops {
     width: 25%;
     font-size: 11px;
   }
+
   #zip-search-button, #zip-search-input {
     font-size: 11px;
   }
+
   .parsley-errors-list {
     font-size: 9px;
   }
-  .map-content {
+
+  .form-container {
     width: 32%;
+  }
+
+  .stops-list {
+    font-size: 13px;
+  }
+
+  .stops-list li {
+    line-height: 4;
+  }
+
+  .stops-list li:before {
+    margin-right: 13px;
   }
 }

@@ -17,14 +17,15 @@
 </div>
 
 <script>
+function setHeader(xhr) {
+  xhr.setRequestHeader('Authorization', 'Token 2adc95279bbd2a6a69a5f08ddd2325562a262736');
+}
+
 function selectRoute(selected) {
   $(".stops-list").empty();
   $(".stops-list-container p").remove();
   $(".list-spinner").addClass("spinning")
 
-  function setHeader(xhr) {
-    xhr.setRequestHeader('Authorization', 'Token 2adc95279bbd2a6a69a5f08ddd2325562a262736');
-  }
   var request = $.ajax({
     url: "https://perkins-dev.raizlabs.xyz/agencies/1/routes/" + selected + "/stops",
     type: 'GET',
@@ -45,9 +46,6 @@ function selectRoute(selected) {
   });
 }
 
-function setHeader(xhr) {
-  xhr.setRequestHeader('Authorization', 'Token 2adc95279bbd2a6a69a5f08ddd2325562a262736');
-}
 var request = $.ajax({
   url: "https://perkins-dev.raizlabs.xyz/agencies/1/routes?include_details=0",
   type: 'GET',
