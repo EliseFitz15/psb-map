@@ -187,7 +187,6 @@ html, body {
 	animation: loading 1.2s infinite linear;
 }
 
-
 @-webkit-keyframes loading {
   to { -webkit-transform: rotate(360deg); }
 }
@@ -230,5 +229,10 @@ html, body {
 
   .stops-list li:before {
     margin-right: 13px;
+  }
+
+  .route-selector-container .route-select {
+    left: 15%;
+    width: 100%;
   }
 }
