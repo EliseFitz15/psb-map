@@ -18,7 +18,7 @@
 
 <script>
 function setHeader(xhr) {
-  xhr.setRequestHeader('Authorization', 'Token 2adc95279bbd2a6a69a5f08ddd2325562a262736');
+  xhr.setRequestHeader('Authorization', 'Token 54fdca8993c763119379479b02c87bda23683f1c');
 }
 
 function selectRoute(selected) {
@@ -35,9 +35,9 @@ function selectRoute(selected) {
       if (response.length > 0) {
         $(".stops-list-container").prepend("<p>The following <span>" + response.length + "</span> stops on this route still need clues:</p>");
 
-        for (var i = 0; i < response.length; i++) {
-          $(".stops-list").append("<li>" + response[i]["name"] + "</li>");
-        };
+        response.forEach(function(stop) {
+          $(".stops-list").append("<li>" + stop["name"] + "</li>");
+        });
       } else {
         $(".stops-list-container").prepend("<p>Thank you to all our crowdsourcers this bus route doesn't have any bus stops that require clues!</p>");
       };
@@ -51,9 +51,9 @@ var request = $.ajax({
   type: 'GET',
   crossDomain: true,
   success: function(response) {
-    for (var i = 0; i < response.length; i++) {
-      $(".route-select").append("<option value=" + "\"" + response[i]["id"] + "\">" + response[i]["name"] + "</option>");
-    };
+    response.forEach(function(stop){
+      $(".route-select").append("<option value=" + "\"" + stop["id"] + "\">" + stop["name"] + "</option>");
+    });
   },
   beforeSend: setHeader
 });

@@ -1,7 +1,7 @@
-var infoWindow = new google.maps.InfoWindow();
 var visibleMarkers = []
 var hiddenMarkers = []
 var boston = { lat: 42.3601, lng: -71.0589 }
+var infoWindow = new google.maps.InfoWindow();
 
 var indoorStops = ["Harvard Lower Busway @ Red Line",
 "Harvard Upper Busway @ Red Line",
@@ -33,7 +33,7 @@ var needsCluesImage = {
 };
 
 function setHeader(xhr) {
-  xhr.setRequestHeader('Authorization', 'Token 2adc95279bbd2a6a69a5f08ddd2325562a262736');
+  xhr.setRequestHeader('Authorization', 'Token 54fdca8993c763119379479b02c87bda23683f1c');
 }
 $.ajax({
   url: "https://api.blindways.org/agencies/1/stops?needs_more_clues=1",
@@ -153,7 +153,7 @@ function initMap() {
 
 function displayButtons() {
   $('.toggle-all-stops').css('display', 'block');
-  $('.box').css('display', 'block');
+  $('.form-container').css('display', 'block');
 }
 
 function CenterControl(controlDiv, map) {
