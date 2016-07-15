@@ -1,3 +1,4 @@
+var infoWindow = new google.maps.InfoWindow();
 var visibleMarkers = []
 var hiddenMarkers = []
 var boston = { lat: 42.3601, lng: -71.0589 }
@@ -35,7 +36,7 @@ function setHeader(xhr) {
   xhr.setRequestHeader('Authorization', 'Token 2adc95279bbd2a6a69a5f08ddd2325562a262736');
 }
 $.ajax({
-  url: "https://perkins-dev.raizlabs.xyz/agencies/1/stops?needs_more_clues=1",
+  url: "https://api.blindways.org/agencies/1/stops?needs_more_clues=1",
   type: 'GET',
   crossDomain: true,
   success: function(data) {
@@ -53,12 +54,11 @@ $.ajax({
 
 function getStopsWithClues() {
   $.ajax({
-    url: "https://perkins-dev.raizlabs.xyz/agencies/1/stops?needs_more_clues=0",
+    url: "https://api.blindways.org/agencies/1/stops?needs_more_clues=0",
     type: 'GET',
     crossDomain: true,
     success: function(data) {
       data.forEach(function(stop) {
-        var infoWindow = new google.maps.InfoWindow();
         var marker = new google.maps.Marker({
           position: stop["location"],
           title: stop["name"],
@@ -70,10 +70,10 @@ function getStopsWithClues() {
           return function() {
             infoWindow.setContent(
               "<div>" +
-              "<p><span style='font-weight:bold;'>/Bus Stop: </span>" + stop["name"] + "</p>" +
+              "<p><span style='font-weight:bold;'>Bus Stop: </span>" + stop["name"] + "</p>" +
               "</div>"
             );
-            infoWindow.open(map, marker);
+            infoWindow.open(map, this);
           }
         })(marker));
         hiddenMarkers.push(marker);
@@ -99,7 +99,6 @@ function initMap() {
   map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
 
   visibleMarkers.forEach(function(stop){
-    var infoWindow = new google.maps.InfoWindow();
     var marker = new google.maps.Marker({
       position: stop["location"],
       title: stop["name"],
@@ -114,10 +113,10 @@ function initMap() {
           "<p><span style='font-weight:bold;'>Bus Stop: </span>" + stop["name"] + "</p>" +
           "</div>"
         );
-        infoWindow.open(map, marker);
+        infoWindow.open(map, this);
       }
     })(marker));
-  })
+})
 
   $('#zip-search').on('submit', function(e){
     e.preventDefault();
@@ -154,7 +153,7 @@ function initMap() {
 
 function displayButtons() {
   $('.toggle-all-stops').css('display', 'block');
-  $('.form-container').css('display', 'block');
+  $('.box').css('display', 'block');
 }
 
 function CenterControl(controlDiv, map) {

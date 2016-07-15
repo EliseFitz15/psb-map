@@ -125,44 +125,6 @@ html, body {
   line-height: 2;
 }
 
-.stops-list li:before {
-  content: "";
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  display: block;
-  margin-right: 39px;
-  float: left;
-  margin-top: 6px;
-  background-color: white;
-  z-index: 1;
-  border: 5px solid #009CDE;
-}
-
-.stops-list li:after {
-  content: "";
-  width: 4px;
-  height: 48px;
-  display: block;
-  margin-top: -28px;
-  background-color: #E0004D;
-  z-index: 0;
-  margin-left: 15px;
-  margin-bottom: -10px;
-}
-
-.stops-list li:last-of-type:after {
-  content: "";
-  width: 0px;
-  height: 0px;
-  display: block;
-  margin-top: -28px;
-  background-color: #E0004D;
-  z-index: 0;
-  margin-left: 15px;
-  margin-bottom: -10px;
-}
-
 .spinning {
   display: block;
 }
@@ -225,10 +187,6 @@ html, body {
 
   .stops-list li {
     line-height: 4;
-  }
-
-  .stops-list li:before {
-    margin-right: 12px;
   }
 
   .route-selector-container .route-select {

@@ -27,13 +27,13 @@ function selectRoute(selected) {
   $(".list-spinner").addClass("spinning")
 
   var request = $.ajax({
-    url: "https://perkins-dev.raizlabs.xyz/agencies/1/routes/" + selected + "/stops",
+    url: "https://api.blindways.org/agencies/1/routes/" + selected + "/stops",
     type: 'GET',
     crossDomain: true,
     success: function(response) {
       $(".list-spinner").removeClass("spinning");
       if (response.length > 0) {
-        $(".stops-list-container").prepend("<p>The following <span>" + response.length + "</span> stops still need clues on this route:</p>");
+        $(".stops-list-container").prepend("<p>The following <span>" + response.length + "</span> stops on this route still need clues:</p>");
 
         for (var i = 0; i < response.length; i++) {
           $(".stops-list").append("<li>" + response[i]["name"] + "</li>");
@@ -47,7 +47,7 @@ function selectRoute(selected) {
 }
 
 var request = $.ajax({
-  url: "https://perkins-dev.raizlabs.xyz/agencies/1/routes?include_details=0",
+  url: "https://api.blindways.org/agencies/1/routes?include_details=0",
   type: 'GET',
   crossDomain: true,
   success: function(response) {
