@@ -17,6 +17,21 @@
 </div>
 
 <script>
+var indoorStops = ["Harvard Lower Busway @ Red Line",
+"Harvard Upper Busway @ Red Line",
+"Alewife Station Busway",
+"Kenmore Station Busway",
+"Forest Hills Station Lower Busway",
+"Forest Hills Station Upper Busway",
+"Ruggles Sta - Upper Level",
+"Andrew Station Busway",
+"Wellington Station Busway",
+"Columbia Rd @ JFK/UMASS Station",
+"Fields Corner Station @ Red Line",
+"Dorchester Ave @ Ashmont Busway",
+"Burgin Pkwy @ Quincy Center Station",
+"N Quincy Station @ Red Line"]
+
 function setHeader(xhr) {
   xhr.setRequestHeader('Authorization', 'Token 54fdca8993c763119379479b02c87bda23683f1c');
 }
@@ -31,15 +46,19 @@ function selectRoute(selected) {
     type: 'GET',
     crossDomain: true,
     success: function(response) {
+      var stopsList = []
       $(".list-spinner").removeClass("spinning");
-      if (response.length > 0) {
-        $(".stops-list-container").prepend("<p>The following <span>" + response.length + "</span> stops on this route still need clues:</p>");
 
+      if (response.length > 0) {
         response.forEach(function(stop) {
-          $(".stops-list").append("<li>" + stop["name"] + "</li>");
+          if (jQuery.inArray(stop["name"], indoorStops) < 0) {
+            stopsList.push(stop);
+            $(".stops-list").append("<li>" + stop["name"] + "</li>");
+          };
         });
+        $(".stops-list-container").prepend("<p>The following <span>" + stopsList.length + "</span> stops on this route still need clues:</p>");
       } else {
-        $(".stops-list-container").prepend("<p>Thank you to all our crowdsourcers this bus route doesn't have any bus stops that require clues!</p>");
+        $(".stops-list-container").prepend("<p>Thank you to all our crowdsourcers. This bus route doesn't have any bus stops that require clues!</p>");
       };
     },
     beforeSend: setHeader
