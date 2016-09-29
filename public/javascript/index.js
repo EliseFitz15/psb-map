@@ -148,7 +148,11 @@ function initMap() {
         marker.setMap(map);
       };
     });
+    console.log("Stops that have clues:");
+    console.log(hiddenMarkers.length);
   });
+  console.log("Stops that still need clues:");
+  console.log(visibleMarkers.length);
 }
 
 function displayButtons() {
